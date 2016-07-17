@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+     {% block css %}
+        <link href="static/css/strength.css" rel="stylesheet">
+		<link href="static/css/app.css" rel="stylesheet"> 
+	 {% endblock %}
+
+	 {% block content %}
+
+        <input type="hidden"  class="hid_creative_url"   value="{{creative_url}}"/>
+	     <input type="hidden"  class="hid_thumbnails"   value="{{thumbnails}}"/>
+		<!-- section start -->
+		<!-- ================ -->
+		<div class="section"  >
+			<div class="container">   
+						<table class="ul_strength"> 
+							
+				  {% for app_v in app_ls_view %}
+				  <tr class="strength_tr">
+					  <td class="number">
+						  {{forloop.counter}}
+					  </td>
+					  <td class="td_logo">
+						  <a href="/app_detail/{{app_v.0}}" target="_blank">
+						  <div class="overlay-container overlay-container-strength overlay-container-strength-{{app_v.0}}">
+							   <input type="hidden" value="{{app_v.0}}" class="hid_creative_id" />
+								</div> 
+								</a>
+								</td>
+					 <td class="td_appname">
+						  <label class="col_name_label">{{app_v.1}}</label>
+								</td> 
+						<td class="td_progress">
+						  <div class="progress">	 
+							<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50"
+								aria-valuemin="0" aria-valuemax="{{app_v.5}}" style="width:50%"> 
+								
+							</div>
+							 
+							<!--
+					   </div> 
+					      </td>
+						  <td class="td_network_logo"> 
+						  <div class="ad_network" style="background-image:url({{logo_url}}{{app_v.3}});background-repeat: no-repeat center center; background-size : contain;">
+						</div>
+						 --> 
+					</td> 
+					 
+					 <td class="overlay-container-strength-4">  
+							  <label class="col_label">{{app_v.2}}</label> 
+					</td> 
+					  </tr>
+					  {% endfor %}
+						</table>
+						<div class="div_description_holder">
+							</div>
+			</div>
+		</div>
+		<!-- section end -->
+ 
+ 
+ 
+ {% endblock %} 
+  
+{% block js %}
+  
+        <script> 
+			$(document).ready(function(){   
+				var image_url = '';
+				var filename = ''; 
+				
+				{% for app_v in app_ls_view %} 
+					$('.overlay-container-strength-{{app_v.0}}').css({'background':'url({{app_v.4}}) no-repeat center center','background-size':'contain', 'background-color':'#9BA3A0'});
+				{% endfor %}
+				var max = {{app_ls_view.0.5}};
+				
+				$('.progress-bar').each(function(e){
+					
+					var org  = $(this).attr('aria-valuemax');
+					var val = (org/max)*100;
+					$(this).attr('aria-valuemax', val);
+					$(this).css({'width':  (val).toString()+'%'});
+					var str = (val).toString().substring(0,5);
+					str = '热度：'+str+'%';
+					 
+					
+					if(val > 30)
+					{
+						$(this).text(str);
+					}
+					else
+					{
+						$($(this).context.parentElement).append(str); 
+					}
+					$($(this).context.parentElement).append($(this));
+					 
+				});
+			
+		    });
+			</script>
+  {% endblock %}

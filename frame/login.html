@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block css %}
+<link href="static/css/home.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="div_bd div_bd_1" id ="div_bd_1">
+    <p class="div_p_0">
+        AD Show
+    </p>
+    <p class="div_p_1">
+        帮助您设计最好的移动应用广告
+    </p>
+</div>
+<hr>
+<div class="div_bd div_bd_2" id ="div_bd_2">
+   
+    <div class="div_bd_2_1">
+  
+        </div>
+    
+        <div class="div_bd_2_2">
+         <p class="div_p_2">
+        创意画廊帮助你了解业界顶尖的广告创意
+    </p>
+    <p class="div_p_2">
+        实时覆盖市场主流移动应用
+    </p>
+    <p class="div_p_2">
+        第一时间掌握最新广告创意
+    </p>
+    </div>
+</div>
+<hr>
+<div class="div_bd div_bd_3" id ="div_bd_3">
+   
+    <div class="div_bd_3_1">
+       
+        </div> 
+        <div class="div_bd_2_2">
+         <p class="div_p_2">
+        覆盖主流广告平台
+    </p>
+    <p class="div_p_2">
+        监控超过30000+款APP推送的广告
+    </p>
+    <p class="div_p_2">
+        透析数据，打造成功的广告推广策略
+    </p>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+    $(document).ready(function(){    
+                var height = window.innerHeight; 
+                $('.div_bd_1').css({'height': height.toString()+'px','width': '100%', 
+                'background':'url(/static/images/bg-image-2.jpg) no-repeat center center','background-size':'100%', 
+            });
+               $('.div_bd_2_1').css({'height': (height).toString()+'px','width': '70%', 
+                'background':'url(/static/images/home_2.png) no-repeat center center','background-size':'100%', 
+            });
+              $('.div_bd_3_1').css({'height': (height).toString()+'px','width': '70%', 
+                'background':'url(/static/images/home_3.png) no-repeat center center','background-size':'100%', 
+            });
+            $('.div_bd_2').css({'height': height.toString()+'px','width': '100%', 
+                'background':'url(/static/images/portfolio-8.jpg) no-repeat center center','background-size':'100%', 
+            });
+            
+              $('.div_bd_3').css({'height': height.toString()+'px','width': '100%', 
+                'background':'url(/static/images/portfolio-9.jpg) no-repeat center center','background-size':'100%', 
+            });
+            $('.div_bd_3').click(function(e){
+                window.location.href = "{% url 'ad_app' %}";
+            });
+            
+            $('.div_bd_2').click(function(e){
+                window.location.href = "{% url 'ad_latest' %}";
+            });
+            
+         });
+    </script>
+{% endblock %}

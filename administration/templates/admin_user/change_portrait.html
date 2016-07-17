@@ -1,0 +1,79 @@
+{% extends "base.html" %} 
+{% block js %} 
+<script src="/static/plugins/cropper/dist/cropper.js"></script>
+<script src="/static/plugins/cropper/dist/canvas-toBlob.js"></script>
+<script src="/static/plugins/cropper/dist/main.js"></script>
+<script type="text/javascript"  src="/static/user/js/upload_portrait.js"></script> 
+ 
+{% endblock %}
+{% block css %} 
+<link  href="/static/plugins/cropper/dist/cropper.css" rel="stylesheet">
+<link  href="/static/plugins/cropper/dist/main.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/user/css/change_portrait.css"/>
+{% endblock %}
+ 
+{% block content %}
+<div class="container container_portrait">
+    <div class="row">
+      <div class="col-md-9">
+        <!-- <h3 class="page-header">Demo:</h3> -->
+        <div class="img-container">
+          <img id="image" src="{{request.user.head_portrait }}" alt="Picture">
+        </div>
+      </div>
+      <div class="col-md-3">
+        <!-- <h3 class="page-header">Preview:</h3> -->
+            <div class="docs-preview clearfix">
+               <div class="img-preview preview-lg"></div>
+              
+                <div class="row">
+                    <div class="col-md-9 docs-buttons"> 
+                    
+                      <div class="btn-group"> 
+                            <button type="button" class="btn btn-primary" data-method="rotate" data-option="-30" title="Rotate Left"> 
+                                <span class="fa fa-rotate-left"></span> 
+                            </button>
+                              <button type="button" class="btn btn-primary" data-method="rotate" data-option="30" title="Rotate Right"> 
+                                  <span class="fa fa-rotate-right"></span> 
+                              </button>
+                            <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+                              <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+                              <span class="docs-tooltip" data-toggle="tooltip" title="点击上传头像..">
+                                <span class="fa fa-upload">&nbsp;&nbsp;浏览</span>
+                              </span>
+                          </label>
+                      </div>
+                
+                      <div class="btn-group btn-group-crop"> 
+                          <button type="button" class="btn btn-primary" data-method="getCroppedCanvas"> 
+                                <span class="docs-tooltip" data-toggle="tooltip" title="裁剪并保存..."> <i class="fa fa-floppy-o"></i> 保存裁剪 </span>
+                            </button>
+                      </div>
+                
+                      <div class="modal fade docs-cropped" id="getCroppedCanvasModal" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" role="dialog" tabindex="-1">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                              <h4 class="modal-title" id="getCroppedCanvasTitle">预览</h4>
+                            </div>
+                            <div class="modal-body"></div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.png">Download</a>
+                            </div>
+                      </div>
+                  </div>
+                  
+          </div><!-- /.modal -->  
+            </div><!-- /.docs-buttons --> 
+        </div>
+        
+      </div>
+    </div>
+  </div>      
+ </div>     
+{% endblock %}
+ 
+
+ 

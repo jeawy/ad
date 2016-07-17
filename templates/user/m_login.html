@@ -1,0 +1,66 @@
+{% extends "admin/m_base_site.html" %}
+{% block title %}登录{% endblock %} 
+{% load i18n admin_static %}
+{% block extrahead %}{{ block.super }}
+
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "css/m_brand.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "css/m_login.css" %}" />
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+
+{% block nav-global %}
+<div class="form_logo">
+   <a class="host_logo" href="/"><i class="fa fa-home "></i></a><label >map2family</label> 
+</div>
+{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block breadcrumbs %}
+
+{% endblock %}
+{% block unlogin %} {% endblock %}
+{% block content %} 
+<div id="content-main ">
+<form action="/login/"  class="login_form" method="post" id="login-form">{% csrf_token %} 
+  <div class="form-row">
+    <label for="id_username" class="required">{% trans '电子邮箱:' %}</label> <br /> <input id="id_username" maxlength="254" name="email" type="text" value="{{email|default:""}}"/>
+  </div>
+  <div class="form-row">
+    <label for="id_password" class="required">{% trans '密码:' %}</label> <br /><input id="id_password" name="password" type="password" />
+    <input type="hidden" name="next" value="{{next|default:"/"}}" />
+  </div>
+   {% if error %}
+  <label class="errornote">{{error}}</label>
+  {% endif %}
+  <div class="submit-row">
+     <input type="submit" class="submit_login" value="{% trans '登 录' %}" />  
+  </div>
+  
+  <br />
+</form>
+
+<script type="text/javascript">
+    document.getElementById('id_username').focus();
+     
+       
+    
+</script>
+</div> 
+{% endblock %}
+
+{% block custom_footer %}
+<div class="login_third">
+<label class="qqlogolable" for="date" name="title" > {% trans '第三方登录:' %}</label> 
+<a method="post" target="blank" href="https://graph.qq.com/oauth2.0/authorize?client_id=101286196&response_type=code&redirect_uri=http%3A%2F%2Fwww.map2family.com%2Fuser%2Fportrait%2F&state=socialoauth"><img class="qqlogo" src="/static/img/qq.png" ></a> 
+</div>
+<div class="login_footer">
+<a method="post" class="register left" href="{% url 'base:user_register'%}">{% trans '注册会员' %}</a>
+<a method="post" class="fotgot_pwd right" href="{% url 'base:find_password'%}">{% trans '忘记密码' %}</a> 
+</div>
+{% endblock%}
+

@@ -1,0 +1,39 @@
+.overlay-container-strength, overlay-container
+{
+	width:100px;
+	height: 100px;
+}
+
+.td_logo
+{
+	width: 11%;
+}
+
+.td_appname
+{
+	width: 20%;
+}
+.ad_network
+{
+	width:60px;
+	height: 60px;
+}
+ 
+.ad_network{
+    margin-top: 10px;
+    margin-left: 30%;
+}
+
+.ul_strength
+{
+	width: 100%;
+}
+.td_progress
+{
+	    width: 40%;
+}
+
+.overlay-container-strength-4
+{
+	width: 20%;
+}

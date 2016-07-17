@@ -1,0 +1,143 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>jQuery Video Modal Plugin Example</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        
+        <link rel="stylesheet" href="dist/css/videomodal.css">
+        <link rel="stylesheet" href="dist/css/videomodal.defaulttheme.css">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+
+        <style> 
+            html, body{
+                margin:0;
+                padding:0;
+            }
+
+            .container{
+                width:100%;
+                max-width:1000px;
+                margin:auto;
+                text-align:center;
+            }
+            .slide-container-outer{
+                width:100%;
+                max-width:1000px;
+                margin:auto;
+            }
+            .row{
+                overflow: hidden;
+                width: 100%;
+                margin-bottom:2em;
+                
+                min-height: 400px;
+
+            }
+
+            .container p{
+                text-align: center;
+            }
+            
+
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <!--
+        <pre><code>
+    &lt;script&gt;
+    $('.fixed-height-carousel').fixedHeightCarousel({
+        'margin':1,
+        'autoPlay':false,
+        'autoPlayInterval':8000,
+        'maxAutoPlayIntervals':1,
+        'useAnchors':false,
+        'pageAnchorPrefix':'slide-',
+        'animationDuration':600,
+        'animationEase':"easeInOutQuart",
+        'themeClass':'fixed-height-carousel-theme-default',
+        'initialUnloadedClass':'unloaded',
+        'minimumLoad':1,
+        'initKeyboardEvents':true,
+        'initDraggingEvents':true,
+        'initUI':true
+    });
+    &lt;/script&gt;
+        </code></pre>-->
+        <div class="row" style="">
+            <div id="video-modal" class='video-modal'>
+                <video loop autoplay muted="" src="https://lesleyloraine-dev.s3.amazonaws.com/media/media/homepage.mp4" poster="https://lesleyloraine-dev.s3.amazonaws.com/media/image/homepage_poster.jpg" id="homepage-video"></video>
+                <div class="controls">
+                    <a href="#" class='play fa fa-play'></a>
+                    <a href="#" class='pause fa fa-pause'></a>
+                    <a href="#" class='scrub'><span class="marker"></span></a>
+                    <a href="#" class='close fa fa-close'></a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- content below carousel -->
+        <div class="container">
+        <h1>jQuery Video Modal Plugin Example</h1>
+        <div class="jquery-script-ads" style="margin:30px auto;"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+            <p><a href="#" class="open">Click to open video</a></p>
+        </div>
+
+
+        <script src="http://code.jquery.com/jquery-1.12.2.min.js"></script>
+
+        <script src="dist/js/videomodal.jqueryplugin.js"></script>
+
+        <script>
+
+            $('#video-modal').videoModal();
+            var modal = $('#video-modal').data("videoModal");
+
+            $("a.open").bind("click", function(event){
+                event.preventDefault();
+                modal.open(true);
+            });
+        
+            
+        </script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+    </body>
+</html>

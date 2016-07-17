@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+     {% block css %}
+        <link href="static/css/strength.css" rel="stylesheet">
+		<link href="static/css/custom.css" rel="stylesheet"> 
+	 {% endblock %}
+
+	 {% block content %}
+
+        <input type="hidden"  class="hid_creative_url"   value="{{creative_url}}"/>
+	     <input type="hidden"  class="hid_thumbnails"   value="{{thumbnails}}"/>
+		<!-- section start -->
+		<!-- ================ -->
+		<div class="section"  >
+			<div class="container">   
+						<table class="ul_strength"> 
+							
+				  {% for creative_v in creative_ls_view %}
+				  <tr class="strength_tr">
+					  <td class="number">
+						  {{forloop.counter}}
+					  </td>
+					  <td>
+						  <div class="overlay-container overlay-container-strength overlay-container-strength-{{creative_v.0}}">
+							   <input type="hidden" value="{{creative_v.0}}" class="hid_creative_id" />
+								</div>
+								</td>
+								<td>
+						  <div class="progress">	 
+							<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50"
+								aria-valuemin="0" aria-valuemax="{{creative_v.1}}" style="width:50%"> 
+							</div>
+							
+					   </div> 
+					      </td>
+						  <td class="overlay-container-strength-right">
+						  <div class="footer_left" style="background-image:url({{creative_v.8}});background-repeat: no-repeat center center; background-size : contain;">
+						</div>
+						<div class="footer_right"> 
+						  <div class="app_name">{{creative_v.2}}</div>
+						 
+						</div>
+					</td> 
+					  <td class="overlay-container-strength overlay-container-strength-3">  
+							  <label class="col_label">{% if creative_v.4 == 1%} 视频 {% else %} 图片 {% endif%}</label> 
+					</td>
+					 <td class="overlay-container-strength overlay-container-strength-4">  
+							  <label class="col_label">{{creative_v.3}}</label> 
+					</td>
+					<td class="overlay-container-strength"> 
+							  <label class="col_label">首次看到: {{creative_v.6|date:'Y-m-d'}}</label>  
+							  <label class="col_label_s">最近看到: {{creative_v.7|date:'Y-m-d'}}</label>   
+					</td>
+					
+					  </tr>
+					  {% endfor %}
+						</table>
+						<div class="div_description_holder">
+							</div>
+			</div>
+		</div>
+		<!-- section end -->
+ 
+ 
+ 
+ {% endblock %} 
+  
+{% block js %}
+ 
+		<script type="text/javascript" src="static/js/custom.js"></script>
+		
+        <script>
+			 
+			$(document).ready(function(){   
+				var image_url = '';
+				var filename = ''; 
+				{% for creative_v in creative_ls_view %}
+					filename  = '{{creative_v.5}}'+'-{{creative_v.0}}';
+					image_url = '{{thumbnails}}'+filename+'.png';
+					//$('.overlay-container-{{creative.creative_id}}').css({'background':'url({{creative.image_url}}) no-repeat center center',
+					$('.overlay-container-strength-{{creative_v.0}}').css({'background':'url('+image_url+') no-repeat center center','background-size':'contain', 'background-color':'#9BA3A0'});
+				{% endfor %}
+				var max = {{creative_ls_view.0.1}};
+				$('.progress-bar').each(function(e){
+					var org  = $(this).attr('aria-valuemax');
+					var val = (org/max)*100;
+					$(this).attr('aria-valuemax', val);
+					$(this).css({'width':  (val).toString()+'%'});
+					var str = (val).toString().substring(0,5);
+					str = '热度：'+str+'%';
+					if(val > 30)
+					{
+						$(this).text(str);
+					}
+					else
+					{
+						$($(this).context.parentElement).append(str); 
+					}
+					$($(this).context.parentElement).append($(this));
+				});
+			
+		    });
+			</script>
+  {% endblock %}

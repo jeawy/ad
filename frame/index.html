@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% block css %}
+<link href="static/css/custom.css" rel="stylesheet"> 
+<link href="static/css/search.css" rel="stylesheet"> 
+         {% endblock %}	 
+{% block content %}
+        <input type="hidden"  class="hid_creative_url"   value="{{creative_url}}"/>
+	 <input type="hidden"  class="hid_thumbnails"   value="{{thumbnails}}"/>
+		<!-- section start -->
+		<!-- ================ -->
+		<div class="section" id="home">
+			<div class="container"> 
+			<br/>
+				<div class="row  " data-animation-effect="fadeIn">
+					
+					<div class="col-md-12">
+
+						<!-- isotope filters start -->
+						<div class="filters text-center">
+							<ul class="nav nav-pills">
+								<li>
+									<form class="navbar-form full-width search-form">
+										<input type="hidden"  class="index_up" name="index" value="{{index}}"/>
+										 <input type="hidden"  class="hid-category" name="category" value="{{category}}" />
+										<div class="row">
+											<div class="col-lg-6 home-col-lg-6">
+												<div class="input-group">
+														<div class="input-group-btn">
+															<!--
+															<button type="button" class="btn btn-default dropdown-toggle home-dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" name="category" aria-expanded="false" value="test">分类 <span class="caret"></span></button>
+														 -->
+														</div><!-- /btn-group -->
+														<input type="text" class="form-control home-search-input appname_up" name="appname" value="{{appname}}" placeholder="快速搜索广告" aria-label="...">
+														<span class="input-group-btn">
+															<button class="btn btn-default home-search-logo" onclick="searchSubmit(this)" type="submit">
+																<i class="fa fa-search"></i>
+															</button>
+													</span> 
+												</div><!-- /input-group -->
+											</div><!-- /.col-lg-6 --> 
+										</div><!-- /.row --> 
+									</form>
+								</li>
+							</ul>
+							<ul class="nav nav-pills">
+								{% include 'category.html' %}
+							</ul>
+						 
+  
+						</div>
+		
+						<!-- isotope filters end -->
+
+						<!-- portfolio items start -->
+						<div class="isotope-container row grid-space-20">
+							{% for creative in creative_ls %} 
+			
+							<div class="col-sm-6 col-md-3 isotope-item {{creative.ad_app.category}}">
+								<div class="image-box">
+									<div class="overlay-container overlay-container-{{creative.creative_id}}">
+										 <input type="hidden" value="{{creative.creative_id}}" class="hid_creative_id" />
+										<a class="overlay" data-toggle="modal" data-target="#project-{{creative.creative_id}}">
+											{% if creative.video_url %}
+											<i class="fa fa-video-camera" aria-hidden="true"></i>
+											{% else %}
+											<i class="fa fa-search-plus"></i>
+											{% endif %}
+											<span>{% if creative.video_url %}{{creative.duration}}{% endif %}</span>  
+										</a>
+										<div class="div-mark" >
+											<span class="mark-category">{{creative.ad_app.category}}</span>
+											{% if creative.video_url %}
+											<span class="mark-right">
+											   <i class="fa fa-video-camera" aria-hidden="true"></i>
+										    {{creative.duration|center:"10"}}{% endif %}
+											</span>
+										</div>
+									</div>
+									<div class="thumbnail_footer"> 
+										<a href="/app_detail/{{creative.ad_app.app_id}}" target="_blank">
+										<div class="thumbnail_footer_left" style="background-image:url({{creative.ad_app.icon_url60}});background-repeat: no-repeat center center; background-size : contain;">
+										</div></a>
+										<div class="thumbnail_footer_right">
+											<div  class="thumbnail_footer_right_top">
+												 <label data-toggle="tooltip" title="{{creative.ad_app.title}}">{{creative.ad_app.title|truncatechars:17}}</label>
+													</div>
+									      <div  class="thumbnail_footer_right_bottom">
+												<label class="thumbnail_footer_right_bottom_lb">首次看到:{{creative.first_seen|date:' Y-m-d'}}</label>
+												<label class="thumbnail_footer_right_bottom_lb thumbnail_footer_right_bottom_lb_r"> {{creative.width}}x{{creative.height}}</label>
+										</div>
+									</div>
+									</div>
+								</div>
+							</div> 
+							{% endfor %}
+							
+							
+						</div>
+						<!-- portfolio items end -->
+					<!-- isotope filters start -->
+						<div class="filters text-center">
+							<form action="" method="GET"> 
+							<ul class="nav nav-pills latest-nav-pills">
+								<li class="active"> 
+									<button type="submit" onclick="indexSubmit(this)" class="btn btn-primary btn-block btn-addmore">加载更多...</button>
+									<input type="hidden" class="index_down"  name="index" value="{{index}}"/>
+									<input type="hidden" class="appname_down"  name="appname" value="{{appname}}"/>
+									</li> 
+							</ul> 
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- section end -->
+  
+	 {% endblock %} 
+
+		 
+         {% block js %}
+		<script type="text/javascript" src="/static/js/custom.js"></script>
+		<script type="text/javascript" src="/static/js/category.js"></script>
+		<script>
+			
+			
+			function searchSubmit(e) {
+               var index = $('.index_down').val();
+			    $('.index_up').val(index);
+               $(e).parent().submit();
+            
+            }
+			
+			function indexSubmit(e) {
+               var appname = $('.appname_up').val();
+			   $('.appname_down').val(appname);
+               $(e).parent().submit();
+            
+            }
+			
+			$(document).ready(function(){    
+				var image_url = '';
+				var filename = '';
+			
+				 
+				{% for creative in creative_ls %}
+					filename  = '{{creative.url_md5}}'+'-{{creative.creative_id}}';
+					image_url = '{{thumbnails}}'+filename+'.png';
+					//$('.overlay-container-{{creative.creative_id}}').css({'background':'url({{creative.image_url}}) no-repeat center center',
+					$('.overlay-container-{{creative.creative_id}}').css({'background':'url('+image_url+') no-repeat center center','background-size':'contain', 'background-color':'#9BA3A0'});
+				{% endfor %}
+			
+		    });
+			</script>
+		{% endblock %}
+         
+	 

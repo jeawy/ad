@@ -1,0 +1,102 @@
+.upload_portrait
+{
+    margin-top: 80px;
+}
+
+.upload_portrait_bnt
+{
+    width:36%;
+    font-size:2em;
+    z-index:-100;
+    height: 60px;
+    margin-left: 30%;
+}
+#id_portrain
+{
+    display: none;
+    width:80%;
+    border:1px solid red;
+    height:50px;
+    font-size:40px;
+}
+.upload_portrait li label
+{
+    font-size:3em;
+}
+
+ 
+.tip
+{
+    margin-top:40px;
+    font-size:40px;
+    color:red;
+}
+ 
+input.file {
+	 
+}
+
+.new_Btn
+{
+    height:70px;
+    background-image:url('/static/img/bg.jpg');
+ }
+ .li_upload
+ {
+     margin-top: 5%;
+ }
+ .new_Btn li
+{
+    margin-left: 28%;
+    line-height: 80px;
+    width:40%;
+    height:80px;
+    border-radius:10px;
+    box-shadow:  12px 0px 20px -2px #003333;
+    -moz-box-shadow:  12px 0px 20px -2px #003333;
+    -webkit-box-shadow:  5px 5px 20px -2px #003333;
+    margin-bottom:40px;
+    /*background-image:url('/static/img/bg.jpg');*/
+ }
+ .l3_lb_text
+ {
+     margin-top:30px;
+ }
+  .portrait_upload
+ {
+     margin-left:46%;
+     text-align:center;
+ }
+ 
+ .pop_ctrl_upload
+ {
+     width:97%;
+     margin-bottom:10px;
+ }
+ 
+   .portrait_upload_big
+ {
+    width: 350px;
+    height: 350px;
+    margin-left: 39%;
+     text-align:center;
+     border-radius:200px;
+     -moz-border-radius:200px;
+	 -webkit-border-radius:200px;
+     background-size:100%, 100%;
+ }
+ 
+ .pop_ctrl_upload_big
+ {
+     width:97%;
+     margin-bottom:10px;
+     height:450px;
+     
+ }
+ 
+ .container_portrait
+ {
+     margin-top: 100px;  
+ }
+ 
+ 

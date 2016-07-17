@@ -1,0 +1,19 @@
+.input{
+       width:200px;
+       }
+       
+ table tr .star{
+   color:red;
+   font:bold;
+   padding-top: 5%;
+ }
+ 
+ .div_err .err_label{
+    width: 410px;
+    display:inline-block;
+ }
+ .main_content
+ {
+     margin-left:35%;
+     width:80%; 
+ }

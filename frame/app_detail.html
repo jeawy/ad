@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+     {% block css %}
+        <link href="/static/css/app_detail.css" rel="stylesheet"> 
+	 {% endblock %}
+
+	 {% block content %}
+ 
+		<!-- section start -->
+		<!-- ================ --> 
+		
+		<div class="section"  >
+			 <input type="hidden"  class="hid_creative_url"   value="{{creative_url}}"/>
+	        <input type="hidden"  class="hid_thumbnails"   value="{{thumbnails}}"/>
+			<div class="container">   
+				<div class="app_detail_logoheader">
+					<img class="app_logo" src="{{appinfo.icon_url60}}"/>
+					<div class="app_detail_logoheader_lable">
+						<label>{{appinfo.title}}</label>
+						<input type="hidden" value="{{appinfo.app_id}}" id="appinfoid"/>
+						<button type="button" data-toggle="tooltip" title="点击关注此APP动态" class="btn btn-warning btn-concern"><i class="fa fa-plus fa-concern" aria-hidden="true"></i>关注</button>
+						<br/>
+						<label>版本：{{appinfo.current_version}}</label>
+						<label>&nbsp;&nbsp;&nbsp;分类：{{appinfo.category}}</label>
+						<br/>
+						<label>{{appinfo.seller}}</label>
+					 </div>
+		             {% if networks %}
+							{% for network in networks %}
+							    <img class="app_logo" src="{{network.logo_url}}"/>
+							{% endfor %}
+					 {% endif %}
+			    </div>
+		 
+				<div class="second-line">
+					<div class="bar-left">
+						<i class="fa fa-caret-left fa-bar-left" aria-hidden="true"></i>
+						</div>
+					<div class="app_detail_creatives">
+						
+						{% for c_n in c_n_list %}
+						<div class="overlay-container">
+							<input type="hidden" value="{{c_n.creative_id}}" class="hid_creative_id"/>
+							
+						<img class="img_creave image_{{c_n.creative_id}}" src=""/>
+						</div>
+						{% endfor %}
+					</div>
+					<div class="bar-right">
+						<i class="fa fa-caret-right fa-bar-right" aria-hidden="true"></i>
+						</div>
+				 </div>
+				  
+				 <div id="main" style="width: 100%;height:400px;"></div>
+ 	
+			</div>
+		</div>
+		<!-- section end -->
+         <div class="div_description_holder">
+							</div>
+ 
+ 
+ {% endblock %} 
+  
+{% block js %}
+        <script type="text/javascript" src="/static/js/custom.js"></script>
+		<script type="text/javascript" src="/static/plugins/echarts/echarts.common.min.js"></script>
+		<script type="text/javascript" src="/static/center/js/app_detail.js"></script>
+        <script>
+			 
+			$(document).ready(function(){ 
+				
+				
+				var image_url = '';
+				var filename = '';
+			 
+				{% for c_n in c_n_list %}
+					filename  = '{{c_n.url_md5}}'+'-{{c_n.creative_id}}';
+					image_url = '{{thumbnails}}'+filename+'.png'; 
+					$('.image_{{c_n.creative_id}}').attr('src',image_url);
+				{% endfor %}
+				
+				$('.bar-right').click(function(){
+					$('.app_detail_creatives').css({'animation':'creative_move_right 5s cubic-bezier(0.29, 0.69, 0.65, 1.01) forwards'});
+				});
+				
+				$('.bar-left').click(function(){
+					$('.app_detail_creatives').css({'animation':'creative_move_left 5s cubic-bezier(0.29, 0.69, 0.65, 1.01) forwards'});
+				});
+				
+				
+				var myChart = echarts.init(document.getElementById('main'));
+
+				
+				option = {
+							title: {
+								text: '力度变化',
+								subtext: '{{appinfo.title}}'
+							},
+							tooltip: {
+								trigger: 'axis'
+							},
+							legend: {
+								data:['力度']
+							},
+							toolbox: {
+								show: true,
+								feature: {
+									dataZoom: {},
+									dataView: {readOnly: false},
+									magicType: {type: ['line', 'bar']},
+									restore: {},
+									saveAsImage: {}
+								}
+							}, 
+							xAxis:  {
+								type: 'category',
+								boundaryGap: false,
+								data:[{% for item in strength_history reversed %}'{{item.ad_date|date:"m-d"}}',{% endfor %}]  
+							},
+							yAxis: {
+								type: 'value',
+								axisLabel: {
+									formatter: '{value}'
+								}
+							},
+							series: [
+								{
+									name:'力度',
+									type:'line',
+									data:[{% for item in strength_history reversed%}'{{item.ad_share_score}}',{% endfor %}],
+									/*markPoint: {
+										
+										data: [
+											{type: 'max', name: '最大值'},
+											{type: 'min', name: '最小值'}
+										]
+									},*/
+									markLine: {
+										data: [
+											{type: 'average', name: '平均值'}
+										]
+									}
+								}
+							]
+						};
+
+				
+				   myChart.setOption(option);
+
+		    });
+			</script>
+  {% endblock %}

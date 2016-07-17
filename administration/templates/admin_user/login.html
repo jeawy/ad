@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load admin_static %}
+{% block css %}
+<link href="static/css/home.css" rel="stylesheet">
+ <link href="static/css/login.css" rel="stylesheet">
+ 
+{% endblock %}
+{% block content %}
+<div class="div_bd div_bd_1" id ="div_bd_1">
+    <div class="div_login">
+    <ul id="login-dp" class="login-menu">
+							<li>
+								<div class="row">
+										<div class="col-md-12">
+											
+											<div class="logo smooth-scroll">
+											<a href="#banner"><img id="logo" src="{% static 'images/logo.png' %}" alt="Worthy"></a>
+										
+											</div>
+                                            <p class="login_p">  AD Show 帮助您设计最好的移动应用广告 </p>
+                                          
+											<form class="form" role="form" method="post" action="{% url 'user:login'%}" accept-charset="UTF-8" id="login-nav">
+													<div class="form-group">
+														<label class="sr-only" for="exampleInputEmail2">邮件地址</label>
+														<input type="email" class="form-control" id="exampleInputEmail2" name="email" placeholder="邮件地址" required>
+													</div>
+													<div class="form-group">
+														<label class="sr-only" for="exampleInputPassword2">密码</label>
+														<input type="password" class="form-control" id="exampleInputPassword2" name="password" placeholder="密码" required>
+														<div class="help-block text-right"><a href="{% url 'user:find_password'%}">忘记密码 ?</a></div>
+													</div>
+													
+													{% if error %}
+														 <div class="alert alert-danger alert-danger-error fade in">
+															<a href="#" class="close" data-dismiss="alert">&times;</a>
+															<strong>错误!</strong> {{error}}
+													    </div>
+													{% endif %}
+													<div class="form-group">
+														<button type="submit" class="btn btn-primary btn-block">登录</button>
+													</div>
+													
+											</form>
+										</div>
+										<div class="bottom text-center">
+											<a href="{% url 'user:user_register' %}"><b>加入我们...</b></a>
+										</div>
+								</div>
+							</li>
+			           </ul>
+
+    </div>
+</div>
+ 
+{% endblock %}
+{% block js %}
+<script>
+    $(document).ready(function(){    
+                var height = window.innerHeight; 
+                $('.div_bd_1').css({'height': height.toString()+'px','width': '100%', 
+                'background':'url(/static/images/bg-image-2.jpg) no-repeat center center','background-size':'100%', 
+            });
+                 
+         });
+    </script>
+{% endblock %}

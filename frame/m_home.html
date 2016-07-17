@@ -1,0 +1,75 @@
+{% extends 'm_base.html' %}
+{% block css %}
+<link href="static/css/m_home.css" rel="stylesheet"> 
+<link href="static/css/m_search.css" rel="stylesheet"> 
+{% endblock %}
+{% block content %}
+<div class="div_bd div_bd_1" id ="div_bd_1"> 
+        
+    <!-- 
+    <p class="div_p_0">
+        AD Show
+    </p>
+    -->
+    
+   
+    <form class="search-form full-width navbar-form " action="{% url 'ad_latest' %}">
+            <input type="hidden"  class="index_up" name="index" value="0"/>
+            <input type="hidden"  class="hid-category" name="category" value="{{category}}" />
+            <div class="row">
+                <div class="col-lg-6 home-col-lg-6">
+                    <div class="input-group"> 
+                            <input type="text" class="form-control home-search-input" name="appname" value="{{appname}}" placeholder="快速搜索广告" aria-label="...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default home-search-logo" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                        </span> 
+                    </div><!-- /input-group -->
+                </div><!-- /.col-lg-6 --> 
+            </div><!-- /.row -->
+            <div class="col-lg-6 home-col-lg-6  home-category-col-lg-6">
+                <ul class="nav nav-pills home-nav-pills">
+                    {% include 'category.html' %}
+            </ul>
+             <p class="div_p_1">
+                 帮助您设计最好的移动应用广告
+            </p>
+           </div><!-- /.col-lg-6 --> 
+        </form>
+       
+</div>
+ 
+{% endblock %}
+{% block js %}
+<script src="/static/js/category.js" ></script>
+<script>
+    $(document).ready(function(){    
+                var height = window.innerHeight; 
+                $('.div_bd_1').css({'height': height.toString()+'px','width': '100%', 
+                'background':'url(/static/images/m/m_bg-image-2.jpg) no-repeat center center','background-size':'100%', 
+            });
+               $('.div_bd_2_1').css({'height': (height).toString()+'px','width': '70%', 
+                'background':'url(/static/images/home_2.png) no-repeat center center','background-size':'100%', 
+            });
+              $('.div_bd_3_1').css({'height': (height).toString()+'px','width': '70%', 
+                'background':'url(/static/images/home_3.png) no-repeat center center','background-size':'100%', 
+            });
+            $('.div_bd_2').css({'height': height.toString()+'px','width': '100%', 
+                'background':'url(/static/images/portfolio-8.jpg) no-repeat center center','background-size':'100%', 
+            });
+            
+              $('.div_bd_3').css({'height': height.toString()+'px','width': '100%', 
+                'background':'url(/static/images/portfolio-9.jpg) no-repeat center center','background-size':'100%', 
+            });
+            $('.div_bd_3').click(function(e){
+                window.location.href = "{% url 'ad_app' %}";
+            });
+            
+            $('.div_bd_2').click(function(e){
+                window.location.href = "{% url 'ad_latest' %}";
+            });
+            
+         });
+    </script>
+{% endblock %}

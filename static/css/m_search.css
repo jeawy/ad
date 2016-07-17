@@ -1,0 +1,42 @@
+.btn-search-home
+{
+    position: relative;
+    right: 40px;
+    
+    height: 30px;
+    padding-top: 5px;
+    margin-top: 5px;
+    padding-bottom: 5px;
+    border: none;
+    background: 0 0;
+    -webkit-border-radius: 0 30px 30px 0;
+    -moz-border-radius: 0 30px 30px 0;
+    border-radius: 0 30px 30px 0;
+    color: black;
+    min-width: 10px;
+}
+.home-search-input
+{
+    width: 100%;
+    min-width: 260px; 
+    border-right: none; 
+}
+
+.home-search-logo
+{
+    border-left: none; 
+}
+.home-dropdown-toggle 
+{
+    border-radius:30px;
+}
+.li-category
+{
+    width: 25%;
+}
+.li-category, .nav-pills > li + li
+{
+    margin: auto;
+    margin-top: 5px;
+}
+ 

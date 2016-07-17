@@ -1,0 +1,163 @@
+{% load admin_static %}<!DOCTYPE html>
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<title>Jason AD</title>
+		<meta name="description" content="Jason 移动广告创意资讯站">
+		<meta name="author" content="Jason AD">
+
+		<!-- Mobile Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="/static/images/favicon.ico">
+ 
+		<!-- Bootstrap core CSS -->
+		<!--
+		 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+		-->
+		
+		<link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+		
+
+		<!-- Font Awesome CSS -->
+		<link href="/static/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet"  href="/static/plugins/message/m_jquery.message.css" />
+		<!-- Plugins -->
+	 
+
+		<!-- Worthy core CSS file -->
+		<link href="/static/css/style.css" rel="stylesheet">
+      
+		{% block css %}
+         {% endblock %}
+	</head>
+
+	<body class="no-trans">
+		<!-- scrollToTop -->
+		<!-- ================ -->
+		<div class="scrollToTop"><i class="icon-up-open-big"></i></div>
+
+		<!-- header start -->
+		<!-- ================ --> 
+		<header class="header fixed clearfix navbar navbar-fixed-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+
+						<!-- header-left start -->
+						<!-- ================ -->
+						<div class="header-left clearfix">
+
+							<!-- logo -->
+							<div class="logo smooth-scroll">
+								<a href="#banner"><img id="logo" src="{% static 'images/logo.png' %}" alt="Worthy"></a>
+							</div>
+
+							<!-- name-and-slogan -->
+							<div class="site-name-and-slogan smooth-scroll">
+								<div class="site-name"><a href="#banner">Jason AD</a></div>
+								<div class="site-slogan">移动广告创意资讯站</div>
+							</div>
+
+						</div>
+						<!-- header-left end -->
+
+					</div>
+					<div class="col-md-8">
+
+						<!-- header-right start -->
+						<!-- ================ -->
+						<div class="header-right clearfix">
+
+							<!-- main-navigation start -->
+							<!-- ================ -->
+							<div class="main-navigation animated">
+
+								<!-- navbar start -->
+								<!-- ================ -->
+								<nav class="navbar navbar-default" role="navigation">
+									<div class="container-fluid"> 
+										<!-- Collect the nav links, forms, and other content for toggling -->
+										<div class="menu" id="navbar-collapse-1">
+											<ul class="navbar-nav navbar-right"> 
+												<li {% if home_menu %}class="active" {%endif%}><a href="/">首页</a></li>
+												<li {% if latest_menu %}class="active" {%endif%}><a href="{% url 'ad_latest' %}">最新广告</a></li>
+												<li {% if idea_menu %}class="active" {%endif%}><a href="{% url 'ad_strength' %}">创意榜</a></li> 
+												<li {% if app_menu %}class="active" {%endif%}><a href="{% url 'ad_app' %}">广告榜</a></li>
+											</ul>
+										</div>
+
+									</div>
+								</nav>
+								<!-- navbar end -->
+
+							</div>
+							<!-- main-navigation end -->
+
+						</div>
+						<!-- header-right end -->
+
+					</div>
+					<div > 
+						
+						<a href="{% if request.user.is_anonymous %}{% url 'user:login' %}{% else%}#{%endif %}"  
+						{% if not request.user.is_anonymous %}  data-toggle="dropdown"{%endif %} > 
+						<img src="{% if request.user.is_anonymouse or not request.user.is_head_portrait %}\static\images\users\user-login-icon.png{%else%}{{request.user.head_portrait}}{%endif%}" 
+						data-toggle="tooltip"  data-placement="bottom"  
+						title="{%  if not request.user.is_anonymous %}{{user.get_full_name}}{%else%}点击登录或注册...{%endif%}" class="user_login "/>
+						</a>    
+						{% if not request.user.is_anonymous %}
+						<ul class="dropdown-menu dropdown-menu-login" role="menu" aria-labelledby="menu1">
+							<li><a href="{% url 'user:portrait' %}">修改头像</a></li> 
+							<hr>
+							<li><a href="{% url 'user:logout' %}">退出&nbsp;&nbsp;&nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+						</ul>
+						{% endif %}
+					</div>
+					 
+				</div>
+			</div>
+		</header>
+		<!-- header end -->
+{% block content %}
+{% endblock %} 
+			<!-- .subfooter start -->
+			<!-- ================ -->
+			<div class="subfooter">
+				<div class="container">
+					<div class="row">
+						<p class="text-center"><a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备16030385号</a> Copyright © 2016  by <a target="_blank" href="/">Jason AD</a>.联系邮箱：service@adjason.com</p>
+					</div>
+				</div>
+			</div>
+			<!-- .subfooter end -->
+
+		</footer>
+		<!-- footer end -->
+
+		<!-- JavaScript files placed at the end of the document so the pages load faster
+		================================================== -->
+		<!-- Jquery and Bootstap core js files -->
+		
+		<script type="text/javascript" src="/static/plugins/jquery.min.js"></script>
+		<!--
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+		-->
+		
+		<script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+		
+		<script type="text/javascript"  src="/static/plugins/message/jquery.message.js"></script>    
+        <script>
+			$(document).ready(function(){
+				$('.user_login').tooltip();  
+				$('[data-toggle="tooltip"]').tooltip();  
+			});
+		</script>
+		{% block js %}
+         {% endblock %}
+        
+	</body>
+</html>

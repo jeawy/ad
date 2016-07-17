@@ -1,0 +1,93 @@
+.app_detail_logoheader
+{
+	margin-top:10px;
+	
+	display: inline-flex;
+}
+.app_detail_logoheader_lable
+{
+	margin-left: 20px;
+}
+
+.app_logo
+{
+	width: 65px;
+	height: 65px;
+}
+.second-line
+{
+	width: 100%;
+	overflow:hidden;
+    display: inline-flex; 
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999; 
+}
+.app_detail_creatives
+{
+	width: 98%;
+	overflow:auto;
+	position: relative;
+	display: inline-flex;
+}
+.bar-left, .bar-right
+{
+	background-color: rgba(0, 0, 0, 0.9);
+	
+	width: 15px;  
+	cursor: pointer;
+}
+.bar-right
+{ 
+	position:relative;
+	right:0;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+}
+.bar-left
+{ 
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+.fa-bar-left, .fa-bar-right
+{
+	font-size: 36px;
+	padding-top: 55px;
+	cursor: pointer; 
+	transform: scale(1,2); 
+	color: white;
+}
+.fa-bar-right
+{
+	padding-left: 2px;
+}
+.img_creave
+{
+	width: 210px;
+	height: 210px; 
+	margin : 6px;
+	cursor: pointer;
+}
+
+.btn-concern
+{
+	margin-left: 10px;
+	padding-top:0;
+	padding-bottom:0;
+}
+
+.fa-concern
+{
+	padding-right:5px;
+}
+
+@keyframes creative_move_right{
+	from{left: 0px;}
+	to{left: 98%;}
+}
+
+@keyframes creative_move_left{
+	from{left: 98%;}
+	to{left: 0;}
+}
+
+ 

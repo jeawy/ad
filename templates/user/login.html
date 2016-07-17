@@ -1,0 +1,78 @@
+{% extends "admin/base_site.html" %}
+{% block title %}登录{% endblock %} 
+{% load i18n admin_static %}
+{% block extrahead %}{{ block.super }}
+
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />{% endblock %}
+
+
+ 
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+{% block unlogin %} {% endblock %}
+{% block content %}
+{% if form.errors and not form.non_field_errors %}
+<p class="errornote">
+{% if form.errors.items|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+</p>
+{% endif %}
+
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<p class="errornote">
+    {{ error }}
+</p>
+{% endfor %}
+{% endif %}
+
+<div id="content-main ">
+<form action="/login/" method="post" id="login-form">{% csrf_token %}
+  <div class="form-row">
+    <label for="id_username" class="required">{% trans '电子邮箱:' %}</label> <br /> <input id="id_username" maxlength="254" name="email" type="text" value="{{email|default:""}}"/>
+  </div>
+  <div class="form-row">
+    <label for="id_password" class="required">{% trans '密码:' %}</label> <br /><input id="id_password" name="password" type="password" />
+    <input type="hidden" name="next" value="{{next|default:"/"}}" />
+  </div>
+  
+  {% url 'admin_password_reset' as password_reset_url %}
+  {% if password_reset_url %}
+  <div class="password-reset-link">
+    <a href="{{ password_reset_url }}">{% trans '忘记密码或邮箱?' %}</a>
+  </div>
+  {% endif %}
+  <div>
+  {% if error %}
+  <label class="err_label">{{error}}</label>
+  {% endif %}
+  </div>
+  <div class="submit-row">
+    <label>&nbsp;</label><input type="submit" value="{% trans '登录' %}" />  
+  </div>
+  <br />
+  &nbsp;<label for="date" name="title" ><a method="post" href="{% url 'base:user_register'%}">{% trans '注册' %}</a></lable> ||
+  &nbsp;<label for="date" name="title" ><a method="post" href="{% url 'base:find_password'%}">{% trans '忘记密码' %}</a></lable>
+  
+   
+ <label class="qqlogolable" for="date" name="title" > {% trans '第三方登录:' %}</label>
+  &nbsp;<label for="date" name="title" ><a method="post" target="blank" href="https://graph.qq.com/oauth2.0/authorize?client_id=101286196&response_type=code&redirect_uri=http%3A%2F%2Fwww.map2family.com%2Fuser%2Fportrait%2F&state=socialoauth"><img class="qqlogo" src="/static/img/qq.png" ></a></lable>
+</form>
+
+<script type="text/javascript">
+    document.getElementById('id_username').focus(); 
+  {% block content_header %}
+    var innerHeight = window.innerHeight/3;
+    $('#container').css('min-height', innerHeight);
+    {% endblock %}
+</script>
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock%}

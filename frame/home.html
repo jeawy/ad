@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block css %}
+<link href="static/css/home.css" rel="stylesheet"> 
+<link href="static/css/search.css" rel="stylesheet"> 
+{% endblock %}
+{% block content %}
+<div class="div_bd div_bd_1" id ="div_bd_1">
+    <div class="div-search-holder" >
+        <form class="search-form full-width navbar-form " action="{% url 'ad_latest' %}"> 
+         
+            <input type="hidden"  class="index_up" name="index" value="0"/>
+             <input type="hidden"  class="hid-category" name="category" value="{{category}}" />
+            <div class="row">
+                <div class="col-lg-6 home-col-lg-6">
+                    <div class="input-group"> 
+                            <input type="text" class="form-control home-search-input" name="appname" value="{{appname}}" placeholder="快速搜索广告" aria-label="...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default home-search-logo" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                        </span> 
+                    </div><!-- /input-group -->
+                </div><!-- /.col-lg-6 --> 
+            </div><!-- /.row -->
+            <div class="col-lg-6 home-col-lg-6">
+                <ul class="nav nav-pills home-nav-pills">
+                    {% include 'category.html' %}
+            </ul>
+             <p class="div_p_1">
+                 帮助您设计最好的移动应用广告
+            </p>
+           </div><!-- /.col-lg-6 --> 
+        </form> 
+     
+       	
+    </div>
+     
+    <!-- 
+    <p class="div_p_0">
+        AD Show
+    </p>
+    -->
+    
+   
+    
+</div>
+
+<hr>
+<div class="div_bd div_bd_2" id ="div_bd_2">
+   
+    <div class="div_bd_2_1">
+  
+        </div>
+    
+        <div class="div_bd_2_2">
+         <p class="div_p_2">
+        创意画廊帮助你了解业界顶尖的广告创意
+    </p>
+    <p class="div_p_2">
+        实时覆盖市场主流移动应用
+    </p>
+    <p class="div_p_2">
+        第一时间掌握最新广告创意
+    </p>
+    </div>
+</div>
+<hr>
+<div class="div_bd div_bd_3" id ="div_bd_3">
+   
+    <div class="div_bd_3_1">
+       
+        </div> 
+        <div class="div_bd_2_2">
+         <p class="div_p_2">
+        覆盖主流广告平台
+    </p>
+    <p class="div_p_2">
+        监控超过30000+款APP推送的广告
+    </p>
+    <p class="div_p_2">
+        透析数据，打造成功的广告推广策略
+    </p>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="/static/js/category.js" ></script>
+<script>
+    $(document).ready(function(){    
+                var height = window.innerHeight; 
+                $('.div_bd_1').css({'height': height.toString()+'px','width': '100%', 
+                'background':'url(/static/images/bg-image-2.jpg) no-repeat center center','background-size':'100%', 
+            });
+               $('.div_bd_2_1').css({'height': (height).toString()+'px','width': '70%', 
+                'background':'url(/static/images/home_2.png) no-repeat center center','background-size':'100%', 
+            });
+              $('.div_bd_3_1').css({'height': (height).toString()+'px','width': '70%', 
+                'background':'url(/static/images/home_3.png) no-repeat center center','background-size':'100%', 
+            });
+            $('.div_bd_2').css({'height': height.toString()+'px','width': '100%', 
+                'background':'url(/static/images/portfolio-8.jpg) no-repeat center center','background-size':'100%', 
+            });
+            
+              $('.div_bd_3').css({'height': height.toString()+'px','width': '100%', 
+                'background':'url(/static/images/portfolio-9.jpg) no-repeat center center','background-size':'100%', 
+            });
+            $('.div_bd_3').click(function(e){
+                window.location.href = "{% url 'ad_app' %}";
+            });
+            
+            $('.div_bd_2').click(function(e){
+                window.location.href = "{% url 'ad_latest' %}";
+            });
+            
+         });
+    </script>
+{% endblock %}
