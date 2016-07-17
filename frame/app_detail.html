@@ -49,8 +49,10 @@
 						<i class="fa fa-caret-right fa-bar-right" aria-hidden="true"></i>
 						</div>
 				 </div>
-				  
-				 <div id="main" style="width: 100%;height:400px;"></div>
+				  <div class="row">
+				       <div id="main" class="col-md-8" style="width: 60%;height:400px;"></div>
+					   <div id="pic_video_main"  class="col-md-4" style="width: 35%;height:400px;"></div>
+				  </div>
  	
 			</div>
 		</div>
@@ -89,7 +91,7 @@
 				
 				
 				var myChart = echarts.init(document.getElementById('main'));
-
+                var mychar_right = echarts.init(document.getElementById('pic_video_main'));
 				
 				option = {
 							title: {
@@ -144,8 +146,60 @@
 							]
 						};
 
-				
+				   
 				   myChart.setOption(option);
+					option = {
+						title : {
+							text: '视频广告与图片广告比例',
+							subtext: '',
+							x:'center'
+						},
+						
+						tooltip : {
+							trigger: 'item',
+							formatter: "{a} <br/>{b} : {c} ({d}%)"
+						},
+						
+						legend: {
+							orient: 'vertical',
+							left: 'left',
+							data: ['视频','图片' ]
+						},
+						
+						itemStyle:{ 
+								normal:{ 
+									label:{ 
+										show: true, 
+										formatter: '{b} : {c} ({d}%)' 
+									}, 
+									labelLine :{show:true} 
+									} 
+								} ,
+						series : [
+							{
+								name: '比例',
+								type: 'pie',
+								radius : '55%',
+								center: ['50%', '60%'],
+								data:[
+									{value:{{video_count}}, name:'视频'},
+									{value:{{img_count}}, name:'图片'}, 	
+								],
+								itemStyle: {
+									normal:{ 
+										label:{ 
+											show: true, 
+											position: 'inside',
+											formatter: '{c} ({d}%)' 
+										}, 
+										labelLine :{show:true} 
+										} 
+								}
+							}
+						]
+					};
+
+				   mychar_right.setOption(option);
 
 		    });
 			</script>

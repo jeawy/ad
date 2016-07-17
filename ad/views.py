@@ -155,8 +155,11 @@ def app_detail(request, appid):
     try:
         appinfo = models.Appinfo.objects.get(app_id = appid) 
          
-        c_n_list = models.Creative.objects.filter(ad_app = appinfo)[:5]
-         
+        c_n_list    = models.Creative.objects.filter(ad_app = appinfo)#[:5]
+        img_count   = c_n_list.exclude(image_url = '').count()
+        video_count = c_n_list.exclude(video_url = '').count()
+        c_n_list = c_n_list[:5]
+
         strength_history = models.App_strength_history.objects.filter(ad_app = appinfo).order_by('-ad_date')[:10]
         '''
         pdb.set_trace()
@@ -170,6 +173,9 @@ def app_detail(request, appid):
         
         content.setdefault('networks', networks)
         '''
+        content.setdefault('img_count', img_count)
+        content.setdefault('video_count', video_count)
+
         content.setdefault('strength_history', strength_history)
         content.setdefault('appinfo', appinfo)
         content.setdefault('thumbnails', settings.THUMBNAIL_URL)
@@ -180,3 +186,4 @@ def app_detail(request, appid):
                  extra={'user':request.user})
   
     return render(request, 'app_detail.html', content)
+
