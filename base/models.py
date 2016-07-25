@@ -37,6 +37,9 @@ class Network(models.Model):
 class Creative(models.Model):
     creative_id   = models.AutoField(primary_key=True)
     ad_app        = models.ForeignKey(Appinfo)
+    
+    # 1 vedio 
+    # 2 image
     ad_type       = models.SmallIntegerField()
     platform_type = models.SmallIntegerField()
     file_md5      = models.CharField(max_length=1024)

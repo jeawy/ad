@@ -85,6 +85,9 @@ def ad_latest(request):
         page = 20
     else:
         page = 60 
+
+    networks = models.Network.objects.all()
+
     content = {}
     kwargs  = { }
     kwargs['ready'] = 1
@@ -94,7 +97,20 @@ def ad_latest(request):
         if category:
             kwargs['ad_app__category__contains']  = category
            
-            
+
+    # search via network
+    network_id_ls = []
+    for network in networks:
+        if 'network-'+ str(network.network_id) in request.GET:
+            network_id_ls.append(network.network_id)
+    if len( network_id_ls ) > 0:    
+        pass
+
+    if 'ad-type'  in request.GET: 
+        ad_type = request.GET['ad-type']
+        kwargs['ad_type']  = ad_type
+
+
     if 'index' in request.GET and 'appname' in request.GET:
         index   = request.GET['index'] 
         appname = request.GET['appname']
@@ -105,7 +121,7 @@ def ad_latest(request):
         index = int(index)
         index += 1  
 
-
+    
     creative_ls_id = models.Creative.objects.filter(**kwargs).order_by('file_md5').distinct('file_md5').values_list('creative_id',flat=True)
     if index:
         creative_ls    = models.Creative.objects.filter(creative_id__in = creative_ls_id).exclude(ad_app__title__icontains = 'unknown').order_by('-first_seen')[0: index*page]
@@ -127,6 +143,9 @@ def ad_latest(request):
         'appname'     : appname,
         'latest_menu' : True,
         'category'    : category,
+        'networks'    : networks,
+        "media_root"  : settings.MEDIA_URL,
+        'logo_url'   : settings.NETWORK_URL,
     }  
     if request.mobile:
         return render(request, 'm_index.html', content)
