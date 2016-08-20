@@ -1,0 +1,45 @@
+.center_app_left, .center_app_right
+{
+    
+    display: flex;
+}
+
+.app_logo
+{
+    width: 65px; 
+}
+.btn-cancel
+{
+    width: 30px;
+}
+.center_app
+{
+    border: 1px dashed #999;
+    
+}
+.div_logo
+{
+    width: 65px;
+}
+ 
+.app_link label
+{
+    color: black;
+    cursor: pointer;
+    text-align: left;
+    float: left;
+}
+.app_detail_logoheader_lable
+{ 
+    width: 90%;
+    float: right;
+}
+.lb_left
+{
+    float: left;
+    text-align: left;
+}
+.center_app_left .col-sm-6, .center_app_left .col-md-2
+{
+    padding:0;
+}

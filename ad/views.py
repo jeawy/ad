@@ -87,6 +87,7 @@ def ad_latest(request):
         page = 60 
 
     networks = models.Network.objects.all()
+  
 
     content = {}
     kwargs  = { }

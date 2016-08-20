@@ -44,7 +44,9 @@
 										<div class="panel panel-default collapse" id="search_options" >
 											<div class="panel-body" >
 												<div class="row" >
-															{% for network in networks %} 
+													 
+															{% for network in networks %}  
+															 
 																	<div class="col-sm-1"> 
 																		<input type="checkbox" value="{{network.network_id}}" name="network-{{network.network_id}}" class="network-{{network.id}} network-logo-checkbox" />
 																		<img  class="img-rounded img-rounded-logo" src="{{media_root}}{{logo_url}}{{network.logo_url}}" >

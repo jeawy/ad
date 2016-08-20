@@ -1,0 +1,99 @@
+{% extends 'm_base.html' %}
+{% block title %}个人中心{% endblock %}
+{% block css %}
+<link href="/static/center/css/m_index.css" rel="stylesheet">  
+{% endblock %}	 
+{% block content %}
+        <input type="hidden"  class="hid_creative_url"   value="{{creative_url}}"/>
+	 <input type="hidden"  class="hid_thumbnails"   value="{{thumbnails}}"/>
+		<!-- section start -->
+		<!-- ================ -->
+		<div class="section" id="home">
+			<div class="container"> 
+			<br/>
+				<div class="row  " data-animation-effect="fadeIn">
+					
+					<div class="col-md-12"> 
+						<!-- isotope filters end -->
+
+						<!-- portfolio items start -->
+						<div class="isotope-container row grid-space-20">
+							{% for app in apps %} 
+			
+							<div class="col-sm-6 col-md-4">
+								<div class="center_app">
+									<div class="center_app_right">
+										<a class="app_link" href="/app_detail/{{creative.ad_app.app_id}}" target="_blank">
+										<div class="div_logo">
+										<img class="app_logo" src="{{app.icon_url60}}"/>
+										
+										</div>
+										</a>
+										<a class="app_link"  href="/app_detail/{{app.app_id}}" target="_blank">
+										<div class="app_detail_logoheader_lable">
+											<label>{{app.title}}</label>
+											 <br/>
+											<label>{{app.seller}}</label>
+										</div>
+										</a>
+									</div>
+									<hr>
+									<div class="center_app_left">
+										<div class="col-sm-6 col-md-2"> 
+											<label class="lb_left">版本：{{app.current_version}}&nbsp;&nbsp;&nbsp;分类：{{app.category}}</label>
+										    <br/>
+											<label class="lb_left">此APP最新动态...</label>
+											<button type="button" data-toggle="tooltip" title="点击取消关注此APP动态" class="btn btn-xs   btn-info"><i class="fa fa-minus fa-concern" aria-hidden="true"></i>取消关注</button>
+										</div> 
+									</div>
+								</div>
+							</div> 
+							{% endfor %}
+							
+							
+						</div> 
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- section end -->
+  
+	 {% endblock %} 
+
+		 
+         {% block js %}
+		<script type="text/javascript" src="/static/js/custom.js"></script> 
+		<script>
+			
+			
+			function searchSubmit(e) {
+               var index = $('.index_down').val();
+			    $('.index_up').val(index);
+               $(e).parent().submit();
+            
+            }
+			
+			function indexSubmit(e) {
+               var appname = $('.appname_up').val();
+			   $('.appname_down').val(appname);
+               $(e).parent().submit();
+            
+            }
+			
+			$(document).ready(function(){    
+				var image_url = '';
+				var filename = '';
+			
+				 
+				{% for creative in creative_ls %}
+					filename  = '{{creative.url_md5}}'+'-{{creative.creative_id}}';
+					image_url = '{{thumbnails}}'+filename+'.png';
+					//$('.overlay-container-{{creative.creative_id}}').css({'background':'url({{creative.image_url}}) no-repeat center center',
+					$('.overlay-container-{{creative.creative_id}}').css({'background':'url('+image_url+') no-repeat center center','background-size':'contain', 'background-color':'#9BA3A0'});
+				{% endfor %}
+			
+		    });
+			</script>
+		{% endblock %}
+         
+	 

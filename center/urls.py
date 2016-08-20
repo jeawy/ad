@@ -5,6 +5,7 @@ from django.conf import settings
 from center import views
 urlpatterns = patterns('',
     url(r'^add_like_app/$', views.add_like_app, name='add_like_app'), 
+    url(r'^mycenter/$', views.mycenter, name='mycenter'),
 ) 
 urlpatterns += static(settings.MEDIA_URL , document_root = settings.MEDIA_ROOT )
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT )

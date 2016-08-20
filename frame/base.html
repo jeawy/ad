@@ -5,7 +5,8 @@
 <!--<![endif]-->
 	<head>
 		<meta charset="utf-8">
-		<title>Jason AD</title>
+
+		<title>{% block title %}Jason AD{% endblock %}</title>
 		<meta name="description" content="Jason 移动广告创意资讯站">
 		<meta name="author" content="Jason AD">
 
@@ -111,6 +112,8 @@
 						</a>    
 						{% if not request.user.is_anonymous %}
 						<ul class="dropdown-menu dropdown-menu-login" role="menu" aria-labelledby="menu1">
+							<li><a href="{% url 'center:mycenter' %}">个人主页</a></li> 
+							<hr>
 							<li><a href="{% url 'user:portrait' %}">修改头像</a></li> 
 							<hr>
 							<li><a href="{% url 'user:logout' %}">退出&nbsp;&nbsp;&nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
